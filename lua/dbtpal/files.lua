@@ -39,7 +39,10 @@ if config.options.extended_path_search then
         group = "dbtPal",
         pattern = { "*.sql", "*.yml", "*.md" },
         callback = function(ev)
-            local projPath = projects.detect_dbt_project_dir(ev.file)
+            local projPath = config.options.path_to_dbt_project
+            if projPath == "" then
+              projPath = projects.detect_dbt_project_dir(ev.file)
+            end
             if projPath then
                 vim.opt.path:append(config.options.path_to_dbt_project .. "/macros/**")
                 vim.opt.path:append(config.options.path_to_dbt_project .. "/models/**")
