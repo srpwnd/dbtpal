@@ -73,7 +73,6 @@ M._create_job = function(cmd, args)
                 vim.list_extend(response, j:result())
                 log.warn "dbt command encounted a handled error, see popup for details"
                 log.trace("code:" .. code)
-                log.trace("response:" .. response)
                 log.trace("result:" .. j:result())
             elseif code >= 2 then
                 table.insert(response, "Failed to run dbt command. Exit Code: " .. code .. "\n")
