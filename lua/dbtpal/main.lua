@@ -52,6 +52,7 @@ M.run_command = function(cmd, args) return _cmd_select_args(cmd, args) end
 M._create_job = function(cmd, args)
     if config.options.path_to_dbt_project == "" then
         local bpath = vim.fn.expand "%:p:h"
+        log.trace("Trying to detect dbt project from:" .. bpath)
         if projects.detect_dbt_project_dir(bpath) == false then
             log.warn(
                 "Could not detect dbt project dir, try setting it manually "

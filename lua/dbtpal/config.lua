@@ -20,8 +20,11 @@ M.options = {}
 
 function M.setup(options)
     if options ~= nil then
+        log.trace("Options are not empty, expanding paths:")
         if options.path_to_dbt_project ~= "" then
+            log.trace("Unexpanded path:" .. options.path_to_dbt_project)
             options.path_to_dbt_project = vim.fn.expand(options.path_to_dbt_project)
+            log.trace("Expanded path:" .. options.path_to_dbt_project)
         end
         if options.path_to_dbt_profiles_dir ~= "" then
             options.path_to_dbt_profiles_dir = vim.fn.expand(options.path_to_dbt_profiles_dir)
@@ -30,6 +33,8 @@ function M.setup(options)
 
     M.options = vim.tbl_deep_extend("force", M.defaults, options or {})
 end
+
+log.trace("Calling config setup.")
 
 M.setup()
 
